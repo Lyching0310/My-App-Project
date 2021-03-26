@@ -43,7 +43,7 @@ function showTemp(response) {
 
   //Humidity//
   let humidity = document.querySelector("#humid");
-  humidity.innerHTML = `Humidity: ${response.data.main.humidity}%`;
+  humidity.innerHTML = `Humidity: ${response.data.main.humidity} %`;
 
   //Wind//
   let wind = document.querySelector("#wind");
@@ -54,6 +54,17 @@ function showTemp(response) {
   description.innerHTML = response.data.weather[0].description;
 }
 
+// City Defautl Search
+
+function searchDefault(city) {
+  let cityLabel = city.value;
+  let apiKey = "aff29a6b33c30edafe99104b632f71d7";
+  let apiEnd = "https://api.openweathermap.org/data/2.5/weather";
+  let apiUrl = `${apiEnd}?q=${cityLabel}&appid=${apiKey}&units=metric`;
+
+  axios.get(`${apiUrl}&appid=${apiKey}`).then(showTemp);
+}
+
 //Search Engine section-Event Call//
 function searchCity(event) {
   event.preventDefault();
@@ -62,12 +73,7 @@ function searchCity(event) {
   newH1.innerHTML = `${city}`;
 
   if (city.value) {
-    let cityLabel = city.value;
-    let apiKey = "aff29a6b33c30edafe99104b632f71d7";
-    let apiEnd = "https://api.openweathermap.org/data/2.5/weather";
-    let apiUrl = `${apiEnd}?q=${cityLabel}&appid=${apiKey}&units=metric`;
-
-    axios.get(`${apiUrl}&appid=${apiKey}`).then(showTemp);
+    searchDefault(city);
   } else {
     newH1.innerHTML = `<small>*UNDEFINED CITY*</small>`;
     alert(`Please enter a city`);
@@ -118,3 +124,6 @@ farenheit.addEventListener("click", fahrenTemp);
 
 let celsius = document.querySelector("#celsius");
 celsius.addEventListener("click", celsiTemp);
+
+//Search Default Display
+searchDefault("London");
