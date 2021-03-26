@@ -57,10 +57,9 @@ function showTemp(response) {
 // City Defautl Search
 
 function searchDefault(city) {
-  let cityLabel = city.value;
   let apiKey = "aff29a6b33c30edafe99104b632f71d7";
   let apiEnd = "https://api.openweathermap.org/data/2.5/weather";
-  let apiUrl = `${apiEnd}?q=${cityLabel}&appid=${apiKey}&units=metric`;
+  let apiUrl = `${apiEnd}?q=${city}&appid=${apiKey}&units=metric`;
 
   axios.get(`${apiUrl}&appid=${apiKey}`).then(showTemp);
 }
@@ -68,11 +67,11 @@ function searchDefault(city) {
 //Search Engine section-Event Call//
 function searchCity(event) {
   event.preventDefault();
-  let city = document.querySelector("#search-bar");
+  let city = document.querySelector("#search-bar").value;
   let newH1 = document.querySelector("h1");
   newH1.innerHTML = `${city}`;
 
-  if (city.value) {
+  if (city) {
     searchDefault(city);
   } else {
     newH1.innerHTML = `<small>*UNDEFINED CITY*</small>`;
