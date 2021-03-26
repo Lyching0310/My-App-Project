@@ -54,7 +54,7 @@ function showTemp(response) {
   description.innerHTML = response.data.weather[0].description;
 }
 
-// City Defautl Search
+// City Default Search
 
 function searchDefault(city) {
   let apiKey = "aff29a6b33c30edafe99104b632f71d7";
